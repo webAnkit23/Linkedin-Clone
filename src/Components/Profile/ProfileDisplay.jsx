@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { MdLocationOn } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-import ProfileModal from '../../Helpers/profileModal';
+import ProfileModal from '../../Helpers/ProfileModal'
 import { MdOutlinePhotoLibrary } from "react-icons/md";
 import { storage } from '../../firebase';
 
