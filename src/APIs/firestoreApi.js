@@ -2,7 +2,6 @@
 import { firestore } from "../firebase"
 import { storage } from "../firebase";
 import {doc ,getDocs,getDoc, addDoc,setDoc ,collection ,onSnapshot, Query, query, where, deleteDoc } from "firebase/firestore"
-import { v4 as uuidv4 } from 'uuid';
 import { getDownloadURL,ref, uploadBytesResumable} from 'firebase/storage';
 import { serverTimestamp } from "firebase/firestore";
 
@@ -211,7 +210,7 @@ export const getComment =(postID,setAllComments,) =>{
   }
 }
 export const getImageURL =async (file ,email,url) =>{
-  const postRef = ref(storage ,`post/${email}'/'${uuidv4()}`);
+  const postRef = ref(storage ,`post/${email}'/'${Date.now()*Math.round(Math.random()*100000)}`);
   const uploadtask = uploadBytesResumable(postRef,file);
   uploadtask.on('state_changed' ,snapshot =>{
    const progress =  Math.round(snapshot.bytesTransferred /snapshot.totalBytes )*100;

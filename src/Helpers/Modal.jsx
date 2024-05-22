@@ -9,7 +9,7 @@ import profilephoto from '../assets/profilephoto.png'
 import { sendPostTofirebase } from '../APIs/firestoreApi';
 import Loader from '../Components/Loader';
 import { useUserContext } from '../Context/userContext';
-import { v4 as uuidv4 } from 'uuid';
+
 import { getDownloadURL,ref, uploadBytesResumable} from 'firebase/storage';
 import { storage } from '../firebase';
 export default function Modal({handleClick ,setshowModal}) {
@@ -23,7 +23,7 @@ export default function Modal({handleClick ,setshowModal}) {
       setImage(file);
     }
   const handleuplaodPostwithImage =() =>{
-    const postRef = ref(storage ,`post/${user.Email}'/'${uuidv4()}`);
+    const postRef = ref(storage ,`post/${user.Email}'/'${Date.now()*Math.round(Math.random()*100000)}`);
     const uploadtask = uploadBytesResumable(postRef,image);
     uploadtask.on('state_changed' ,snapshot =>{
      const progress =  Math.round(snapshot.bytesTransferred /snapshot.totalBytes )*100;
@@ -38,7 +38,7 @@ export default function Modal({handleClick ,setshowModal}) {
         userEmail : user.Email ,
         ProfileImageURL : user.ProfileImageURL,
         userID :user.userID,
-        postID: uuidv4(),
+        postID: Date.now()*Math.round(Math.random()*100000),
         Imageurl : res
       }
       const re= await sendPostTofirebase(object);
@@ -60,7 +60,7 @@ export default function Modal({handleClick ,setshowModal}) {
           userEmail : user.Email ,
           ProfileImageURL : user.ProfileImageURL,
           userID :user.userID,
-          postID: uuidv4()
+          postID: Date.now()*Math.round(Math.random()*100000)
         }
        const res= await sendPostTofirebase(object);
        console.log(res);
