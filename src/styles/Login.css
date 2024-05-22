@@ -1,0 +1,19 @@
+.loginContainer{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    gap: 30px;
+    margin-left: 30px;
+}
+.login_hero_img{
+    height: 100%;
+    width: 50%;
+}
+@media screen and (max-width: 800px) {
+.login_hero_img{
+    display: none;
+}
+.loginContainer{
+    margin: 20px;
+}
+}

@@ -1,0 +1,57 @@
+.postBox{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.postInputs{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.postInputs img{
+    cursor: pointer;
+ 
+    border-radius: 50%;
+}
+.postInputs div{
+    cursor: pointer;
+    color: #828282;
+    height: 50px;
+    background: #e4e4e4;
+    border-radius: 25px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    
+}
+.thingstoadd{
+    align-items: center;
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: space-evenly;
+    width: 100%;
+}
+.item{
+    cursor: pointer;
+    color: grey;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: serif;
+    height: 50px;
+    width: 100px;
+    justify-content: center;
+    border-radius: 5px;
+    transition: all .5s steps(1000) 0s;
+}
+.item:hover{
+    background-color: rgb(231, 230, 230);
+}

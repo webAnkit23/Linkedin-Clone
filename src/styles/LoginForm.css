@@ -1,0 +1,73 @@
+.LinkedinLogo{
+    height: 90px;
+    width: 150px;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: system-ui;
+    cursor : 'pointer';
+   
+}
+.formContainer{
+    width: 100%;
+}
+.form h1{
+    font-weight: 300;
+    color: #d62a2a;
+}
+.forgot{
+    text-decoration: none;
+    color: #033c57;
+    width: fit-content;
+}
+.forgot:hover{
+    text-decoration: underline;
+    color: #055c84;
+}
+.or{
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.button{
+    cursor: pointer;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+.button:hover{
+    background-color: #095f95f4;
+    transition: all .3s;
+}
+.transparent{
+    background-color: transparent;
+}
+.bordershow{
+    border: 1px solid black;
+}
+.borderhide{
+    border: none;
+    transition: all .5s;
+}
+.borderhide:hover{
+    background: transparent;
+    color: #15a2e3;
+}
+.transparent:hover{
+    background-color: rgb(237, 231, 231);
+}
+.black{
+    color: rgb(31, 30, 30);
+}
+.blue{
+    background-color: #15a2e3;
+}
+.white{
+    color: white;
+}

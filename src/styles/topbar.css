@@ -1,0 +1,94 @@
+.topbar_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px ;
+    padding: 10px;
+   
+}
+.topbar_left{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.topbar_search{
+    border-radius: 3px;
+    display: flex;
+    gap: 5px;
+    background: #e6e6e8;
+    height: 40px;
+   
+    align-items: center;
+}
+.topbar_searchbox{
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    padding: 2px ;
+    height: 100%;
+    width: 100%;
+}
+.topbar_searchbox:focus{
+    outline: none;
+}
+.topbar_list{
+    display: flex;
+    gap: 10px;
+}
+.topbar_icon{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    gap: 3px;
+  
+    min-width: fit-content;
+    justify-content: center;
+    border-bottom: 2px solid transparent;
+    transition: all 1s steps(10000) ease-in-out;
+}
+
+.topbar_icon:hover{
+    color: grey;
+}
+.active{
+    border-bottom: 2px solid black;
+}
+
+
+@media only screen and (max-width : 800px) {
+    .topbar_list{
+        width: 100vw;
+        display: flex;
+        position: fixed;
+        bottom: 0px;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;   
+        background-color: #e1e1ff;
+    }
+    .topbar_search{
+        width: 100%;
+    }
+    .topbar_left{
+        width: 100%;
+    }
+    
+}
+@media only screen and (max-width : 400px) {
+    .topbar_icon p{
+        display: none;
+    }
+    .topbar_list{
+        background-color: #e1e1ff;
+       height: 50px;
+       z-index: 2;
+    }
+    .active{
+        border-bottom: none;
+        color: #4e4ea7;
+    }
+}
