@@ -30,8 +30,9 @@ function Login() {
     <div className='w-[100vw] absolute  h-[100vh]  pt-[20px] bg-[#fffbee] top-0 z-[1000000] '>
     <div className='loginContainer'>
         <LoginForm></LoginForm>
-        <img src={loginImage} className='login_hero_img'></img>
     
+        <img src={loginImage} className='hidden md:flex login_hero_img' />
+       
     </div>
     </div>
     }

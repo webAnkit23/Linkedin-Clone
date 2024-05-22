@@ -30,12 +30,3 @@
       opacity: 1;
     }
   }
-  @keyframes loaderAnimation {
-    0%{
-      transform: translateX(0px);
-
-    }
-    100%{
-      transform: translate((200px));
-    }
-  }

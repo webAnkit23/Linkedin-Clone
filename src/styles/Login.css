@@ -9,10 +9,8 @@
     height: 100%;
     width: 50%;
 }
-@media screen and (max-width: 800px) {
-.login_hero_img{
-    display: none;
-}
+@media only screen and (max-width: 800px) {
+
 .loginContainer{
     margin: 20px;
 }

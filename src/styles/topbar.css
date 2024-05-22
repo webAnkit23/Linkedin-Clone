@@ -59,7 +59,7 @@
 }
 
 
-@media only screen and (max-width : 800px) {
+@media only screen and (max-width : 768px) {
     .topbar_list{
         width: 100vw;
         display: flex;
