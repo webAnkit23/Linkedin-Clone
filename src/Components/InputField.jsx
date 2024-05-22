@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/InputField.css'
+import '../styles/inputField.css';
 export default function InputField({type ,myid ,label,handleChange}) {
     const style ={
         display: 'flex',
