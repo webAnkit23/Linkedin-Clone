@@ -25,9 +25,9 @@ export default function Post({post}) {
       navigate(`../profile/${post.userID}`);
    }
    useMemo(() =>{
+    if(!user)return;
     fetchOtherUserInfo(post?.userID)
     .then((res) =>{
-      console.log(res);
      setPostUser({
        userID:userID,
        ...res
@@ -36,16 +36,16 @@ export default function Post({post}) {
     .catch((e) =>{
      console.error(e);
     })
-   },[]);
-   const formatdate =() =>{
+   },[user]);
+   const formatdate =useMemo(() =>{
+    if(!post)return ;
     let a =post?.time?.toDate();
-    let arr =a.toString().split(' ');
-
+    let arr =a?.toString()?.split(' ');
+    if(!arr)return;
     return arr[2] + " " + arr[1] + " "+arr[3] ;
-   }
+   },[post]);
   return (
     <div className='w-[100%] bg-white border-2 rounded-lg p-2 shadow-lg border-slate-200 mt-4'>
-
         <div className='relative grid grid-cols-[auto_1fr] gap-2'>
             <RxCross2 size={35} className='absolute sm:flex hidden p-1 duration-200 rounded-full hover:bg-gray-200 top-[-4px] right-0'/>
             <div className='w-[90px] h-[90px] border-2 rounded-full'>
@@ -55,7 +55,7 @@ export default function Post({post}) {
             <h1 onClick={handleClick} className='text-lg cursor-pointer '>
               <span className='hover:text-blue-600 hover:underline'>{postUser?.Name}</span><span  className='text-gray-500 cursor-default font-lg'> {postUser?.Pronouns?`(${postUser?.Pronouns})`:''}</span></h1>
             <span className='text-sm text-gray-500 flex flex-wrap break-all max-h-[80px] overflow-hidden text-wrap max-w-[80%]'>{postUser?.HeadLine}</span>
-            <p className='flex items-center '>{formatdate()} <span className='ml-1 font-bold'>.</span ><IoMdGlobe className='ml-1 text-blue-600 ' size={20}/></p>
+            <p className='flex items-center '>{formatdate} <span className='ml-1 font-bold'>.</span ><IoMdGlobe className='ml-1 text-blue-600 ' size={20}/></p>
             </div>
         </div>
         <div className='mt-3 ml-2 text-lg text-gray-600'>

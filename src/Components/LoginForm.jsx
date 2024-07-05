@@ -4,6 +4,7 @@ import '../styles/LoginForm.css';
 import InputField from './InputField';
 import { LoginAPI} from '../APIs/authAPI';
 import useMyNavigate from '../hooks/useMyNavigate';
+import { toast } from 'react-toastify';
 export default function LoginForm() {
   const navigate = useMyNavigate();
   
@@ -15,19 +16,22 @@ let handleChange =(e) =>{
    setform( (prev) =>{ return {...prev, [e.target.id] : e.target.value}});
 }
 let handleSubmit = async (e) =>{
+  console.log(form);
          e.preventDefault();
-         console.log('a');
          try {
             const result = await LoginAPI(form.email, form.password);
             if (result instanceof Error) {
-                throw new Error('User not found');
+                toast.error('User not found');
+                return;
             }
              else {
+
               localStorage.setItem('userEmail' , result.user.email);
+              toast.success("signed in");
               navigate('/home');
             }
           } catch (error) {
-              console.error(error);
+              toast.error(error);
           }
     }
 let handleClick =() =>{
@@ -36,7 +40,7 @@ let handleClick =() =>{
   return (
     <div className="formContainer">
         <img className='LinkedinLogo' src={Logo}></img>
-        <form className='form' onSubmit={(e) =>handleSubmit(e)}>
+        <form className='form' onSubmit={handleSubmit}>
             <h1>Take your next step towards your career</h1>
             <InputField type ='email' myid ='email' label  ='Email' handleChange ={handleChange}></InputField>
             <InputField type='password' myid ='password'  label='Password' handleChange ={handleChange}></InputField>

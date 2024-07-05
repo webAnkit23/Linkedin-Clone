@@ -6,6 +6,7 @@ import loginImage from '../assets/loginImage.svg';
 import InputField from './InputField';
 import useMyNavigate from '../hooks/useMyNavigate';
 import { createUserOnFirebase } from '../APIs/firestoreApi';
+import { toast } from 'react-toastify';
 export default function RegisterComponent() {
   const navigate = useMyNavigate();
     const [form,setform] = useState({
@@ -20,7 +21,6 @@ export default function RegisterComponent() {
                e.preventDefault();
                try {
                 const result = await RegisterApi(form.email, form.password,form.name);
-                console.log(result);
                 if (result instanceof Error) {
                   throw new Error(result.message);
                 }
@@ -30,7 +30,7 @@ export default function RegisterComponent() {
                   navigate('/home');
                 }
               } catch (error) {
-                alert(error);
+                toast.error(error.message);
               }
               finally{
                 setform({ email :"",

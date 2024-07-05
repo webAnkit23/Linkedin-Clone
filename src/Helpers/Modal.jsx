@@ -12,6 +12,7 @@ import { useUserContext } from '../Context/userContext';
 
 import { getDownloadURL,ref, uploadBytesResumable} from 'firebase/storage';
 import { storage } from '../firebase';
+import { toast } from 'react-toastify';
 export default function Modal({handleClick ,setshowModal}) {
     const [text,setText] = useState("");
     const [loading ,setLoading] = useState(false);
@@ -27,9 +28,9 @@ export default function Modal({handleClick ,setshowModal}) {
     const uploadtask = uploadBytesResumable(postRef,image);
     uploadtask.on('state_changed' ,snapshot =>{
      const progress =  Math.round(snapshot.bytesTransferred /snapshot.totalBytes )*100;
-     console.log(progress);
+     
     },(err) =>{
-     console.log(err);
+     toast.error(err);
     } ,async() =>{
      getDownloadURL(uploadtask.snapshot.ref).then(async(res) =>{
       let object ={
@@ -46,8 +47,6 @@ export default function Modal({handleClick ,setshowModal}) {
     }) 
   }
     const handleSubmit = async () =>{
-      
-
        try{
         setLoading(true);
         if(image){
@@ -63,13 +62,12 @@ export default function Modal({handleClick ,setshowModal}) {
           postID: Date.now()*Math.round(Math.random()*100000)
         }
        const res= await sendPostTofirebase(object);
-       console.log(res);
        if(res){
-        throw new Error('server is down');
+        toast.error('server is down');
        }
        }
        catch(err){
-        console.log(err);
+        toast.error(err);
        }
        finally{
         setshowModal(false);

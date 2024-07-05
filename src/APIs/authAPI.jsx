@@ -14,15 +14,15 @@ const updateuserInfo =(name) =>{
 
 
 export const LoginAPI = async (email,password) =>{
-
-   let auth =getAuth();
   try {
+      let auth = getAuth();
        const userCredential = await signInWithEmailAndPassword(auth ,email, password);
       return userCredential;
-  } 
-     catch (error) {
-          return error;   
-         }
+    } 
+   catch (error) {
+        console.log('m');
+         throw error;   
+    }
 }
 export const RegisterApi = async (email,password,name) =>{
    let auth =getAuth();

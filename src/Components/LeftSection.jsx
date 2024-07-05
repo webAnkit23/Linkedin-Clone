@@ -12,8 +12,9 @@ export default function LeftSection() {
     navigate('../profile');
   }
   useMemo(() =>{
+    if(!user)return;
     getMyConnections(user?.userID ,setmyConnections);
-  },[]);
+  },[user]);
   return (
     <div className='w-[100%] z-0 md:w-auto'>
       <div className='flex items-center justify-center'>

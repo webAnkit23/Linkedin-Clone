@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useMemo } from 'react'
 import { MdLocationOn } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import ProfileModal from '../../Helpers/ProfileModal'
 import { MdOutlinePhotoLibrary } from "react-icons/md";
 import { storage } from '../../firebase';
-
 import { getDownloadURL,ref, uploadBytesResumable } from 'firebase/storage';
-import { updateInfo } from '../../APIs/firestoreApi';
+import { getMyConnections, updateInfo } from '../../APIs/firestoreApi';
 import { useRef } from 'react';
 import ImageModal from '../../Helpers/ImageModal';
 import { useUserContext } from '../../Context/userContext';
+import { toast } from 'react-toastify';
 export default function ProfileDisplay({user}) {
     const [editModal ,setEditModal] = useState(false);
+    const [connections ,setmyConnections] = useState([]);
+    useMemo(() =>{
+        if(!user)return;
+        getMyConnections(user?.userID ,setmyConnections);
+       },[user]);
     const [bgImage ,setBgImage] = useState(null);
     const [profileImage ,setProfileImage] = useState(null);
     const [imageModal ,setImageModal] = useState(false);
     const bgref = useRef();
     const dpRef = useRef();
     const {user :currentUser} = useUserContext();
-    console.log(user);
+   
     const handleBgClick =() =>{
         bgref.current.click();
     }
@@ -32,13 +37,12 @@ export default function ProfileDisplay({user}) {
         const uploadtask = uploadBytesResumable(bgRef,file);
         uploadtask.on('state_changed' ,snapshot =>{
          const progress =  Math.round(snapshot.bytesTransferred /snapshot.totalBytes )*100;
-         console.log(progress);
+   
         },(err) =>{
-         console.log(err);
+         toast.error(err.message);
         } ,async() =>{
          getDownloadURL(uploadtask.snapshot.ref).then((res) =>{
-            console.log(res);
-           updateInfo(user.userID ,{bgImageURL : res})
+            updateInfo(user.userID ,{bgImageURL : res})
          })
         }) 
     }
@@ -71,7 +75,7 @@ export default function ProfileDisplay({user}) {
                 <h2 className='text-lg font-medium text-blue-700'>{user.College ? `went to ${user.College}`:''}</h2>
                 <h2>{user?.Education? user.Education : ''}</h2>
                {user.City&& <h3 className='flex items-center'> {user.City},{user.Country}<MdLocationOn className='text-blue-400' size={25}/></h3>}
-                <span className='font-medium text-blue-600 '>40 connections</span>
+                <span className='font-medium text-blue-600 '>{connections.length} connections</span>
                  <div className='flex flex-col '>
                     <span>Phone Number : {user.PhoneNumber?user.PhoneNumber :'Complete your profile'}</span>
                     <span>Email : {user.Email}</span>

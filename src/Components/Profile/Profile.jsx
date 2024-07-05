@@ -5,9 +5,10 @@ import { fetchPosts } from '../../APIs/firestoreApi'
 export default function Profile({user}) {
   const [posts ,setPosts] = useState([]);
   useMemo(() =>{
+    if(!user)return;
    fetchPosts(setPosts);
-  },[])
-  console.log(posts);
+  },[user]);
+  
   useEffect(() =>{
     document.body.style.overflowX ='hidden';
     return () =>{

@@ -4,6 +4,7 @@ import { storage } from "../firebase";
 import {doc ,getDocs,getDoc, addDoc,setDoc ,collection ,onSnapshot, Query, query, where, deleteDoc } from "firebase/firestore"
 import { getDownloadURL,ref, uploadBytesResumable} from 'firebase/storage';
 import { serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const postdb = collection(firestore ,'posts');
 const userdb = collection(firestore ,'users');
@@ -91,13 +92,12 @@ export const fetchOtherUserInfo =async(userID) =>{
       throw new Error('not found');
     }
   } catch (error) {
-    throw new Error('Error getting document');
+    toast.error('Error getting document');
   }
 }
 
 
  export const likePost =(postID ,userID ,isliked) =>{
-  console.log('e');
   try{
      let doctoLike = doc(likedb , `${postID+'_'+userID}`);
      if(isliked){
@@ -107,7 +107,7 @@ export const fetchOtherUserInfo =async(userID) =>{
      setDoc(doctoLike , {userID ,postID});
   }
   catch(e){
-     console.log(e);
+     toast.error(e);
   }
 }
 export const connectPeople =(currentUserID ,secondID,isConnected) =>{
@@ -121,7 +121,7 @@ export const connectPeople =(currentUserID ,secondID,isConnected) =>{
     setDoc(doctoConnect ,{myID:currentUserID , personID:secondID});
   }
   catch(e) {
-    console.log(e);
+    toast.error(e);
   }
 }
 export const checkConnections =(currentUserID ,secondID ,setConnection) =>{
@@ -138,7 +138,7 @@ export const checkConnections =(currentUserID ,secondID ,setConnection) =>{
      })
   }
   catch(e) {
-    console.log(e);
+    toast.error(e);
   }
 }
 export const getMyConnections =(currentUserID,setMyConnections) =>{
@@ -155,7 +155,7 @@ export const getMyConnections =(currentUserID,setMyConnections) =>{
      })
    }
    catch(e){
-    console.log(e);
+    toast.error(e.message);
    }
 }
 
@@ -171,11 +171,11 @@ export const getLikes =(postID ,userID ,setLikeCount ,setUserLike) =>{
   })
 }
 catch(e){
-  console.log(e);
+ toast.error(e);
 }
 }
 export const PostComment =(postID,comment,userID,commentPerson,commentPersonImageURL) =>{
-  console.log(userID);
+ 
   try{
         addDoc(commentDB ,{
           postID ,
@@ -187,7 +187,7 @@ export const PostComment =(postID,comment,userID,commentPerson,commentPersonImag
         });
   }
   catch(e){
-    console.log(e);
+    toast.error(e);
   }
 }
 export const getComment =(postID,setAllComments,) =>{
@@ -206,7 +206,7 @@ export const getComment =(postID,setAllComments,) =>{
 
   }
   catch(e){
-    console.log(e);
+    toast.error(e);
   }
 }
 export const getImageURL =async (file ,email,url) =>{
@@ -214,12 +214,11 @@ export const getImageURL =async (file ,email,url) =>{
   const uploadtask = uploadBytesResumable(postRef,file);
   uploadtask.on('state_changed' ,snapshot =>{
    const progress =  Math.round(snapshot.bytesTransferred /snapshot.totalBytes )*100;
-   console.log(progress);
   },(err) =>{
-   console.log(err);
+   toast.error(err);
   } ,async() =>{
    getDownloadURL(uploadtask.snapshot.ref).then((res) =>{
-    console.log(res);
+    
     url =res;
    })
   }) 

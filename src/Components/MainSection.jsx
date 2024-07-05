@@ -2,6 +2,7 @@ import React from 'react';
 import FeedPost from './FeedPost';
 import LeftSection from './LeftSection';
 import RightSection from './RightSection';
+import 'react-toastify/dist/ReactToastify.css';
 export default function MainSection() {
   return (
     <div className='container-full'>

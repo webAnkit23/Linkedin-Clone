@@ -9,7 +9,6 @@ import Loader from '../Components/Loader';
 export default function ImageModal({setImageModal,profileImage,setProfileImage}) {
   const {user} = useUserContext();
   const [loading ,setLoading] = useState(false);
-  console.log(user);
   const handleUpload = () =>{
     try{
       setLoading(true);
@@ -17,9 +16,9 @@ export default function ImageModal({setImageModal,profileImage,setProfileImage})
      const uploadtask = uploadBytesResumable(profileRef,profileImage);
      uploadtask.on('state_changed' ,snapshot =>{
       const progress =  Math.round(snapshot.bytesTransferred /snapshot.totalBytes )*100;
-      console.log(progress);
+   
      },(err) =>{
-      console.log(err);
+      toast.error(err);
      } ,async() =>{
       getDownloadURL(uploadtask.snapshot.ref).then((res) =>{
         updateInfo(user.userID ,{ProfileImageURL : res})
@@ -27,7 +26,7 @@ export default function ImageModal({setImageModal,profileImage,setProfileImage})
      }) 
     }
     catch(e){
-      console.log(e);
+      toast.error(e);
     }
     finally{
       setLoading(false);

@@ -111,7 +111,7 @@ useEffect(() =>{
     let timer =null;
       if(search){
         timer = setTimeout(() =>{
-             console.log('a');
+      
              const fil = allUsers.filter((user) =>user.Name.toLowerCase().startsWith(search.toLowerCase()));   
              setFilterData(fil);  
              },250);

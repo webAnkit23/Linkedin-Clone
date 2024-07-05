@@ -1,13 +1,12 @@
 import React ,{useState ,useEffect} from 'react'
 import Post from '../Posts/Post';
 export default function PostDisplay({posts ,userID}) {
-    console.log(posts,userID);
+    
     const [filterPost ,setFilterPost] = useState([]);
     useEffect(() =>{
         const filter = posts.filter((post) => post?.userID === userID);
         setFilterPost(filter);
     },[posts]);
-    console.log(filterPost);
   return (
     <div>
         
